@@ -1,4 +1,4 @@
-# ![](icon.png)FakeName
+# ![](icon.png)FakeName ![Workflow status](https://img.shields.io/github/actions/workflow/status/BrakusTapus/FakeName/build.yml)
 
 ![Github Latest Releases](https://img.shields.io/github/downloads/BrakusTapus/FakeName/latest/total.svg?style=for-the-badge)
 ![Github All Releases](https://img.shields.io/github/downloads/BrakusTapus/FakeName/total.svg?style=for-the-badge)

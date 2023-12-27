@@ -1,48 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
+    <!-- This sets default properties and dalamud references -->
+    <Import Project="Dalamud.Plugin.Bootstrap.targets" />
 
+    <!-- General properties -->
     <PropertyGroup>
-        <AssemblyVersion>1.0.10</AssemblyVersion>
-        <TargetFramework>net7.0-windows</TargetFramework>
-        <PlatformTarget>x64</PlatformTarget>
-        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <Authors>ArchiTed</Authors>
+        <Authors>Kirbo</Authors>
+        <Version>1.0.0.10</Version>
+        <Description>Show a fake name on your game ui.</Description>
+        <PackageProjectUrl>https://github.com/BrakusTapus/FakeName</PackageProjectUrl>
+        <PackageLicenseExpression>AGPL-3.0-or-later</PackageLicenseExpression>
+        <IsPackable>false</IsPackable>
     </PropertyGroup>
 
-    <PropertyGroup>
-    <DalamudLibPath>$(AppData)\XIVLauncher\addon\Hooks\dev\</DalamudLibPath>
-    </PropertyGroup>
-
+    <!-- Including the manifest file -->
     <ItemGroup>
-	  <PackageReference Include="DalamudPackager" Version="2.1.12" MakeZip="true" />
-        <Reference Include="FFXIVClientStructs">
-            <HintPath>$(DalamudLibPath)FFXIVClientStructs.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="Newtonsoft.Json">
-            <HintPath>$(DalamudLibPath)Newtonsoft.Json.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="Dalamud">
-            <HintPath>$(DalamudLibPath)Dalamud.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="ImGui.NET">
-            <HintPath>$(DalamudLibPath)ImGui.NET.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="ImGuiScene">
-            <HintPath>$(DalamudLibPath)ImGuiScene.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="Lumina">
-            <HintPath>$(DalamudLibPath)Lumina.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="Lumina.Excel">
-            <HintPath>$(DalamudLibPath)Lumina.Excel.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
+        <Content Include="FakeName.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+    <!-- Including images -->
+    <ItemGroup>
+        <Content Include="..\images\*.png">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <Visible>false</Visible>
+        </Content>
+    </ItemGroup>
+    <ItemGroup>
+      <None Remove="FakeName.yaml" />
     </ItemGroup>
 
 </Project>
