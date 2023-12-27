@@ -7,3 +7,5 @@ bin/
 /desktop.ini
 manifest.json
 FakeName/FakeName.yaml
+icon.png
+icon.svg

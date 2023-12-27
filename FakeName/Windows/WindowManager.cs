@@ -14,7 +14,7 @@ internal class WindowManager : IDisposable
         WindowSystem.AddWindow(ConfigWindow);
 
         Service.Interface.UiBuilder.Draw += DrawUi;
-        Service.Interface.UiBuilder.OpenConfigUi += ConfigWindow.Open;
+        Service.Interface.UiBuilder.OpenConfigUi += ToggleConfigWindow;
     }
 
     public void Dispose()
@@ -28,4 +28,10 @@ internal class WindowManager : IDisposable
     {
         WindowSystem.Draw();
     }
+
+    public void ToggleConfigWindow()
+    {
+        ConfigWindow.IsOpen = !ConfigWindow.IsOpen;
+    }
+
 }

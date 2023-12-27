@@ -22,7 +22,7 @@ public class Plugin : IDalamudPlugin
         
         Hooker = new Hooker();
 
-        Service.CommandManager.AddHandler("/fakename", new CommandInfo(OnCommand)
+        Service.CommandManager.AddHandler("/fakename", new CommandInfo(OnCommandToggleConfigWindow)
         {
             HelpMessage = "Open a config window about fake name.",
         });
@@ -36,8 +36,9 @@ public class Plugin : IDalamudPlugin
         WindowManager.Dispose();
     }
 
-    private void OnCommand(string command, string arguments)
+    private void OnCommandToggleConfigWindow(string command, string arguments)
     {
-        WindowManager.ConfigWindow.Open();
+        WindowManager.ConfigWindow.IsOpen = !WindowManager.ConfigWindow.IsOpen;
+        //WindowManager.ConfigWindow.Open();
     }
 }
