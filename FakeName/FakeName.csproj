@@ -6,7 +6,7 @@
     <!-- General properties -->
     <PropertyGroup>
         <Authors>Kirbo</Authors>
-        <Version>1.0.0.11</Version>
+        <Version>1.0.0.12</Version>
         <Description>Show a fake name on your game ui.</Description>
         <PackageProjectUrl>https://github.com/BrakusTapus/FakeName</PackageProjectUrl>
         <PackageLicenseExpression>AGPL-3.0-or-later</PackageLicenseExpression>
