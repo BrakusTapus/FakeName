@@ -10,11 +10,11 @@
         "name",
         "ui"
     ],
-    "DalamudApiLevel": 9,
+    "DalamudApiLevel": 10,
     "AcceptsFeedback": false,
     "IconUrl": "https://raw.githubusercontent.com/BrakusTapus/FakeName/main/images/icon.png",
     "ImageUrls": [
         "https://raw.githubusercontent.com/BrakusTapus/FakeName/main/FakeName/images/image1.png"
     ],
-    "Changelog": "Click the new Changelog button to see whats new"
+    "Changelog": "Update to Api10"
 }

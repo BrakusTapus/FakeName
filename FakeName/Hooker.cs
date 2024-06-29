@@ -27,7 +27,7 @@ public class Hooker
     [Signature("E8 ?? ?? ?? ?? 8D 4E 32", DetourName = nameof(AtkTextNodeSetTextDetour))]
     private Hook<AtkTextNodeSetTextDelegate> AtkTextNodeSetTextHook { get; init; }
 
-    private delegate void SetNamePlateDelegate(IntPtr addon, bool isPrefixTitle, 
+    private delegate void SetNamePlateDelegate(IntPtr addon, bool isPrefixTitle,
         bool displayTitle, IntPtr titlePtr, IntPtr namePtr, IntPtr fcNamePtr, IntPtr prefix, int iconId);
 
     /// <summary>
@@ -88,7 +88,7 @@ public class Hooker
 
         Task.Run(() =>
         {
-            if((DateTime.Now - LastCheck).TotalSeconds > 1)
+            if ((DateTime.Now - LastCheck).TotalSeconds > 1)
             {
                 LastCheck = DateTime.Now;
 
@@ -109,28 +109,36 @@ public class Hooker
 
             foreach (var obj in Service.ObjectTable)
             {
-                if (obj is not PlayerCharacter member) continue;
+                if (obj is not IPlayerCharacter member) continue;
                 var memberName = member.Name.TextValue;
                 if (memberName == player.Name.TextValue) continue;
 
                 Replacement[new string[] { memberName }] = GetChangedName(memberName);
             }
 
-            if (Service.Condition[ConditionFlag.ParticipatingInCrossWorldPartyOrAlliance])
+
+
+
+
+            foreach (var group in InfoProxyCrossRealm.Instance()->CrossRealmGroups)
             {
-                foreach (var x in InfoProxyCrossRealm.Instance()->CrossRealmGroupArraySpan[0].GroupMembersSpan)
+                foreach (var member in group.GroupMembers)
                 {
-                    var name = MemoryHelper.ReadStringNullTerminated((IntPtr)x.Name);
-                    Replacement[new string[] { name }] = GetChangedName(name);
+                    unsafe
+                    {
+                        fixed (byte* namePtr = member.Name)
+                        {
+                            var name = MemoryHelper.ReadStringNullTerminated((IntPtr)namePtr);
+                            Replacement[new string[] { name }] = GetChangedName(name);
+                        }
+                    }
                 }
             }
-            else
-            {
-                foreach (var obj in Service.Config.FriendList)
-                {
-                    Replacement[new string[] { obj }] = GetChangedName(obj);
-                }
-            }
+
+
+
+
+
 
             var friendList = (AddonFriendList*)Service.GameGui.GetAddonByName("FriendList", 1);
             if (friendList == null) return;
@@ -168,7 +176,7 @@ public class Hooker
     {
         if (!Service.Config.Enabled)
         {
-            AtkTextNodeSetTextHook.Original(node,text);
+            AtkTextNodeSetTextHook.Original(node, text);
             return;
         }
         AtkTextNodeSetTextHook.Original(node, ChangeName(text));
